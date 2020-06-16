@@ -72,8 +72,12 @@ h2{
    padding:10px;
    margin-right: 2%;
 }
-.item-contains h3 {
+.item-content {
+  display: flex;
   flex-grow: 2;
+  align-items: center;
+}
+.item-contains h3 {
   color: whitesmoke;
 }
 .category-list {
@@ -119,7 +123,7 @@ h2{
   flex-direction: column;
   align-items: center;
   font-size: 2rem;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 .modal-header {
   display: flex;
@@ -212,4 +216,16 @@ h2{
 
 .options-rounds span {
   color: black;
+}
+
+#add-item {
+  color: pink;
+  /* border-radius: 40%; */
+  /* border: 5px solid pink; */
+}
+#add-item:hover, .delete-item:hover{
+  cursor: pointer;
+}
+.delete-item:hover {
+  color:red;
 }

@@ -75,11 +75,11 @@ class Timer extends Component {
             <h2> Stage: {(stage > 5) ? "REST" : "WORK"} </h2>
             <h2>{`${minutes}:${(seconds < 10) ? "0" : ""}${seconds}`}</h2>
           </div>
-          <div className="options-rounds">
+          {/* <div className="options-rounds">
             <h3><span>Rounds: </span>5 </h3>
             <h3><span>Work Time:</span> {25} min</h3>
             <h3><span>Rest Time: </span> {10} min</h3>
-          </div>
+          </div> */}
           <div id="timer-buttons">
             <button style={{ "backgroundColor": (!started) ? "lightgreen" : "red" }}
               onClick={() => (!started) ? this.start() : this.stop()}>{!(started) ? "Start" : "Stop"}</button>

@@ -5,7 +5,8 @@ export default class Item extends Component {
     super(props);
     this.state = {
       completed: props.item.completed,
-      title: props.item.title
+      title: props.item.title,
+      showDelete: false
     }
   }
 
@@ -16,11 +17,16 @@ export default class Item extends Component {
 
   render() {
     return (
-      <div className="item-contains">
-        <input type="checkbox"
-          checked={this.state.completed}
-          onChange={this.handleChange} />
-        <h3 onClick={() => this.props.showDetails(this.props.item)}>{this.state.title}</h3>
+      <div className="item-contains"
+        onMouseEnter={() => this.setState(prevState => ({ ...prevState, showDelete: true }))}
+        onMouseLeave={() => this.setState(prevState => ({ ...prevState, showDelete: false }))}>
+        <div className="item-content">
+          <input type="checkbox"
+            checked={this.state.completed}
+            onChange={this.handleChange} />
+          <h3 onDoubleClick={() => this.props.showDetails(this.props.item)}>{this.state.title}</h3>
+        </div>
+        {this.state.showDelete && <h3 className="delete-item" onClick={(this.props.delete)}>X</h3>}
       </div>
     )
   }
