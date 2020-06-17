@@ -50,9 +50,27 @@ h2{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
+
 .filter-titles {
   color: yellowgreen;
+  display: flex;
+  width: 15%;
+  justify-content: space-between;
+}
+
+.filter-titles p {
+  margin-left: 10px;
+  /* border: 1px solid ; */
+}
+
+.active-filter{
+  color: orange;
+  /* border: 1px solid white; */
+}
+.filter-titles p:hover {
+  cursor: pointer;
 }
 
 
@@ -61,6 +79,7 @@ h2{
   display: flex;
   align-items: center;
   border-bottom: grey solid 2px;
+  font-size: 1.5rem;
 }
 .item-contains input[type="checkbox"] {
    /* Double-sized Checkboxes */
@@ -74,9 +93,11 @@ h2{
 }
 .item-content {
   display: flex;
-  flex-grow: 2;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
+
 .item-contains h3 {
   color: whitesmoke;
 }
@@ -92,12 +113,19 @@ h2{
 }
 
 /* ------- NewTask -------- */
+.new-task-contains {
+  padding: 12px;
+  font-weight: 700;
+  font-size: 1.5rem;
+
+}
 .new-task-contains input {
   width: 96%;
-  margin-left: 2%;
-  height: 45px;
-  color: lightgrey;
-  background-color: rgba(0,0,0,0.2);
+  /* margin-left: 3.25%; */
+  /* font-weight: 1.5rem; */
+  /* height: 45px; */
+  /* color: lightgrey; */
+  /* background-color: rgba(0,0,0,0.2); */
 }
 
 /* ------- Modal -------- */
@@ -226,6 +254,29 @@ h2{
 #add-item:hover, .delete-item:hover{
   cursor: pointer;
 }
+.delete-item {
+  color: white;
+}
 .delete-item:hover {
-  color:red;
+  color:yellow;
+}
+
+.item-title {
+  flex-grow: 2;
+  padding:12px;
+  /* font-size: 1.25rem; */
+  color:whitesmoke
+}
+.list-text-field {
+  width: 92%;
+  background-color: transparent;
+  font-size: 1.5rem;
+  color: white;
+}
+
+input:focus {
+  outline: none;
+}
+.list-text-field {
+  border:0;
 }

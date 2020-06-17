@@ -9,25 +9,46 @@ export default class Item extends Component {
       showDelete: false
     }
   }
+  myInput = React.createRef();
 
-  handleChange = () => {
+
+  handleStatusChange = () => {
     this.setState(prev => ({ ...prev, completed: !prev.completed }))
     this.props.changeStatus()
   }
 
+
+  handleEdit = (event) => {
+    const value = event.target.value
+    this.setState(prev => ({ ...prev, title: value }))
+  }
+
   render() {
+    // console.log(this.myInput)
+    const { completed, title, showDelete } = this.state
     return (
       <div className="item-contains"
         onMouseEnter={() => this.setState(prevState => ({ ...prevState, showDelete: true }))}
         onMouseLeave={() => this.setState(prevState => ({ ...prevState, showDelete: false }))}>
         <div className="item-content">
-          <input type="checkbox"
-            checked={this.state.completed}
-            onChange={this.handleChange} />
-          <h3 onDoubleClick={() => this.props.showDetails(this.props.item)}>{this.state.title}</h3>
+          <div className="item-title">
+            <input type="checkbox"
+              checked={completed}
+              onChange={this.handleStatusChange} />
+            <input
+              className="list-text-field"
+              onChange={this.handleEdit}
+              onBlur={() => {
+                //Check if value is empty 
+                this.setState(prev => ({ ...prev, editable: false }))
+                if (title.length === 0) this.props.delete()
+                else this.props.changeTitle(title)
+              }}
+              value={title} />
+          </div>
+          {showDelete && <span className="delete-item" onClick={(this.props.delete)}>X</span>}
         </div>
-        {this.state.showDelete && <h3 className="delete-item" onClick={(this.props.delete)}>X</h3>}
-      </div>
+      </div >
     )
   }
 }

@@ -7,15 +7,18 @@ export default function NewTask({ insertItem }) {
   const [item, enterItem] = useState("");
   const myInput = useRef();
 
+  // console.log(myInput)
 
   useEffect(() => {
+    // console.log("Current: ", adding)
+    // console.log("Length: ", item.length)
     myInput.current && myInput.current.focus()
   }, [adding])
 
   const handleChange = (event) => {
     const value = event.target.value
     enterItem(value)
-    console.log(value)
+    // console.log(value)
   }
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -30,11 +33,11 @@ export default function NewTask({ insertItem }) {
 
 
   return (<div className="new-task-contains">
-    {(!adding) ? <h2 id="add-item"
-      style={{ "fontFamily": "Arial" }}
-      onClick={() => setAdd(true)}><span>+</span> New Item</h2> :
-      <input type="text-area"
+    {(!adding) ? <span id="add-item"
+      onClick={() => setAdd(true)}>+ New Item</span> :
+      <input className="list-text-field"
         ref={myInput}
+        onBlur={() => setAdd(false)}
         placeholder="New Item"
         value={item}
         onChange={handleChange}
