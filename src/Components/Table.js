@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Item from './Item';
-import Modal from './Modal';
+// import Modal from './Modal';
 import NewTask from './NewTask'
 
 const LIST = {
