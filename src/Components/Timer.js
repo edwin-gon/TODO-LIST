@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Modal from './Modal'
 
+// ************** TIMER ***************
+// Able to set a Pomodoro Timer 
+// Customize Features including:
+// - Number of Stages
+// - Length of Work & Rest Stages 
+
 class Timer extends Component {
   constructor() {
     super();
@@ -9,11 +15,19 @@ class Timer extends Component {
       started: false,
       minutes: 25,
       seconds: 0,
-      numWorkStages: 3,
-      lengthWork: 25,
-      lengthRest: 5,
+      numberOfStages: 3,
+      workLength: 25,
+      shortRest: 5,
+      longRest: 15,
       stage: 1,
+      restPeriod: false,
       roundsCompleted: 0,
+      tmp: {
+        numberOfStages: 3,
+        workLength: 25,
+        shortRest: 5,
+        longRest: 15
+      }
     }
 
   }
@@ -26,24 +40,47 @@ class Timer extends Component {
   stop = () => {
     this.setState(prevState => ({ ...prevState, started: false }))
     clearInterval(this.timer)
-
   }
 
   reset = () => {
+    //If reset the timer just reset current time 
     clearInterval(this.timer)
     this.setState(prevState => ({
+      ...prevState,
       started: false,
-      minutes: 25,
+      minutes: (prevState.restPeriod ? (prevState.stage <= prevState.numberOfStages ? prevState.shortRest : prevState.longRest) :
+        prevState.workLength),
       seconds: 0
     }))
   }
 
   updateTime = () => {
-
-    const { minutes, seconds } = this.state
-
+    const { minutes, seconds, stage, numberOfStages, workLength, shortRest, longRest, restPeriod } = this.state
     if (minutes === 0 && seconds === 0) {
-      clearInterval()
+      if (stage < numberOfStages) {
+        this.setState(prevState => ({
+          ...prevState,
+          minutes: (!restPeriod ? shortRest : workLength),
+          stage: (restPeriod) ? stage + 1 : stage,
+          restPeriod: !restPeriod
+        }))
+      } else if (stage === numberOfStages) {
+        this.setState(prevState => ({
+          ...prevState,
+          restPeriod: true,
+          minutes: longRest,
+          stage: prevState.stage + 1
+        }))
+      } else {
+        clearInterval(this.timer)
+        this.setState(prevState => ({
+          ...prevState,
+          started: false,
+          minutes: workLength,
+          stage: 1,
+          restPeriod: false
+        }))
+      }
     }
     else {
       this.setState(prevState => ({
@@ -54,9 +91,51 @@ class Timer extends Component {
     }
   }
 
+  handleChange = (event) => {
+    const name = event.target.name
+    const value = event.target.value
+    this.setState(prevState => ({ ...prevState, tmp: { ...prevState.tmp, [name]: value } }))
+  }
+
+  handleSubmit = () => {
+    const { numberOfStages, workLength, shortRest, longRest } = this.state.tmp;
+    //Check Values to ensure they are valid
+    this.reset()
+    this.setState(prevState => ({
+      ...prevState, minutes: workLength,
+      numberOfStages,
+      workLength,
+      shortRest,
+      longRest
+    }))
+  }
+
+  handleReset = () => {
+    this.reset()
+    this.setState({
+      show: true,
+      started: false,
+      minutes: 25,
+      seconds: 0,
+      numberOfStages: 3,
+      workLength: 25,
+      shortRest: 5,
+      longRest: 15,
+      stage: 1,
+      restPeriod: false,
+      roundsCompleted: 0,
+      tmp: {
+        numberOfStages: 3,
+        workLength: 25,
+        shortRest: 5,
+        longRest: 15
+      }
+    })
+  }
+
 
   render() {
-    const { minutes, seconds, started, stage, show, numWorkStages } = this.state
+    const { minutes, seconds, started, stage, show, numberOfStages, tmp, restPeriod } = this.state
     // console.log(this.state)
 
     return (<>
@@ -86,37 +165,44 @@ class Timer extends Component {
         <div id="pomodoro">
           <div id="pomodoro-header">
             <div id="stage-header">
-              <h4> Stage: {(stage === numWorkStages) ? "REST" : "WORK"} </h4>
-              <p>{stage} of {numWorkStages}</p>
+              <h2> <span>Stage:</span> {(restPeriod) ? "REST" : `${stage} of ${numberOfStages} (WORK)`}</h2>
             </div>
             <div id="time-header">
-              <h4>Time: {`${minutes}:${(seconds < 10) ? "0" : ""}${seconds}`}</h4>
-
-
-              {/* 
-             */}
+              <h2><span>Time:</span> {`${minutes}:${(seconds < 10) ? "0" : ""}${seconds}`}</h2>
             </div>
           </div>
-          {/* <div className="options-rounds">
-            <h3><span>Rounds: </span>5 </h3>
-            <h3><span>Work Time:</span> {25} min</h3>
-            <h3><span>Rest Time: </span> {10} min</h3>
-          </div> */}
 
-          {/* <div className="gauges">
-            <div className="gauge">
-              <label>Rounds:</label>
-              <input type="number" />
-            </div>
+          <div className="gauges">
             <div className="gauge">
               <label>Stages: </label>
-              <input type="number" />
+              <input type="number" name="numberOfStages"
+                value={tmp.numberOfStages} onChange={this.handleChange} min={1} max={10} />
+            </div>
+            <br />
+            <span id="title-time-modal">Time (in minutes)</span>
+            <div className="gauge">
+              <label>Work Length: </label>
+              <input type="number" name="workLength"
+                value={tmp.workLength} onChange={this.handleChange}
+                min={1} max={60} />
             </div>
             <div className="gauge">
-              <label>Work Period: </label>
-              <input type="number" />
+              <label>Short Break: </label>
+              <input type="number" name="shortRest"
+                value={tmp.shortRest} onChange={this.handleChange}
+                min={1} max={60} />
             </div>
-          </div> */}
+            <div className="gauge">
+              <label>Long Break: </label>
+              <input type="number" name="longRest"
+                value={tmp.longRest} onChange={this.handleChange}
+                min={1} max={60} />
+            </div>
+            <div className="modal-submit-buttons">
+              <button className="apply-button" onClick={this.handleSubmit}>Apply</button>
+              <button className="apply-button" onClick={this.handleReset}>Reset</button>
+            </div>
+          </div>
         </div>
       </Modal>
     </>)

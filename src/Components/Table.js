@@ -86,7 +86,7 @@ export default function Table() {
           <li><NewTask insertItem={(it) => submitItem(it)} /></li>
         </ul>
         {(filteredItems.length > 0) ? <p className="items-counter">Count: {filteredItems.length}</p> :
-          <h1 style={{ "color": "white", "fontStyle": "italic" }}>No Items!</h1>}
+          <h1 style={{ "color": "white", "fontStyle": "italic" }}></h1>}
         {/* <Modal show={showModal}
           close={() => setShow(false)}
           title="Item Details">

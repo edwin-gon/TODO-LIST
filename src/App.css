@@ -150,6 +150,7 @@ h2{
   left: 0;
   top:0;
   padding-top:5%;
+  overflow-y: scroll;
   /* border-radius: 5px; */
   background-color: rgba(0,0,0,0.9);
   color: white;
@@ -160,7 +161,7 @@ h2{
   margin: auto;
   flex-direction: column;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   /* overflow-y: scroll; */
 }
 .modal-header {
@@ -170,12 +171,12 @@ h2{
   align-items: center;
   /* background-color: orange; */
 }
-.close-modal:hover {
-  color: gray;
-  cursor: pointer;
-}
-.close-modal:focus {
-  border: none;
+
+.modal-submit-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .modal-footer {
@@ -199,15 +200,16 @@ h2{
   background-color: transparent;
   font-size: 2rem;
   font-weight: bold;
-  color: white;
+  color: #ff9090;
 }
 
 /* ------ Pomodoro -------- */
 
 #pomodoro {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   /* justify-content: space-evenly; */
+  /* flex-wrap: wrap; */
   width: 100%;
   background-color: orange;
   padding: 2%;
@@ -215,7 +217,8 @@ h2{
 
 #pomodoro-header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
   border-bottom: 6px solid white;
 }
@@ -226,7 +229,6 @@ h2{
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 40px solid orange;
-
 }
 
 .arrow {
@@ -267,7 +269,7 @@ h2{
   border-bottom: 5px solid transparent;
   border-right: 20px solid green;
   transform: translate(-50%,-70%);
-  left:28%;
+  left:30%;
 }
 .tomato-top-right {
   position: absolute;
@@ -277,7 +279,7 @@ h2{
   border-bottom: 5px solid transparent;
   border-left: 20px solid green;
   transform: translate(-50%,-70%);
-  left:72%;
+  left:70%;
 }
 .tomato-top {
   position: absolute;
@@ -348,10 +350,6 @@ h2{
   transition: transform linear 500ms;
 }
 
-/* .reset-button:hover {
-  transform: rotate(360deg);
-} */
-
 .stop-button {
   width: 45px;
   height: 45px;
@@ -359,36 +357,64 @@ h2{
 }
 #stage-header {
   display: flex;
-  /* flex-direction: column; */
-  width: 50%;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content:flex-start ;
+}
+#stage-header h4, #time-header h4 {
+  margin: 10px 5px;
+  font-size: 0.75em;
+}
+#pomodoro span {
+  color: black;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 #time-header {
   display: flex;
-  width: 50%;
-  justify-content: space-evenly;
-  /* flex-direction: column; */
-  align-items: center;
+  justify-content: flex-end;
 }
 
 .gauges {
   display: flex;
   flex-direction: column;
-  width: 100%;
   justify-content: space-evenly;
+}
+
+.gauge {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+  padding:10px;
+}
+.gauge input {
+  width: 50px;
+  font-size: 0.75em;
 }
 .gauge label{
   color: black;
-  margin-right: 8px;
+  /* margin-right: 8px; */
+  font-size: 1em;
+  font-weight: 500;
+  /* text-transform: uppercase; */
+}
+
+#title-time-modal {
+  color: black;
+  border-bottom: 5px solid white;
+}
+
+.apply-button {
+  width: 25%;
+  height: 40px;
+  margin: 16px;
+  border-radius: 8%;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 #timer {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  /* width: 25%; */
-  /* flex-direction: column */
 }
 #timer > * {
   margin: 10px 8px;
@@ -433,11 +459,11 @@ h2{
   /* border-radius: 40%; */
   /* border: 5px solid pink; */
 }
-#add-item, .delete-item, 
+#add-item, .delete-item, .close-modal,
 .reset-button, .play-button, .clock, .stop-button {
   transition: transform linear 200ms;
 }
-#add-item:hover, .delete-item:hover, 
+#add-item:hover,.close-modal:hover, .delete-item:hover, 
 .reset-button:hover, .play-button:hover, .clock:hover, .stop-button:hover  {
   cursor: pointer;
   transform: scale(1.25);
