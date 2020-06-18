@@ -14,8 +14,9 @@ body{
   color: rgb(238, 225, 104);
 }
 
-.App-header h1 {
+.App-header h1.title {
   flex-grow: 2;
+  font-size: 2.5rem;
 }
 
 .App-link {
@@ -24,6 +25,7 @@ body{
 
 h2{
   color: white;
+  font-size: 1.75rem;
 }
 
 .timer-content {
@@ -60,18 +62,22 @@ h2{
 .filter-titles {
   color: yellowgreen;
   display: flex;
-  width: 15%;
-  justify-content: space-between;
+  /* width: 100%; */
+  justify-content: space-evenly;
 }
 
 .filter-titles p {
   margin-left: 10px;
-  /* border: 1px solid ; */
+  padding: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  /* width: 50px; */
+  border: 1px solid transparent;
 }
 
-.active-filter{
+.filter-titles p.active-filter {
   color: orange;
-  /* border: 1px solid white; */
+  border: 1px solid white;
 }
 .filter-titles p:hover {
   cursor: pointer;
@@ -217,9 +223,9 @@ h2{
 .play-button {
   width: 0;
   height: 0;
-  border-top: 22px solid transparent;
-  border-bottom: 22px solid transparent;
-  border-left: 45px solid orange;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 40px solid orange;
 
 }
 
@@ -381,8 +387,15 @@ h2{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 25%;
+  /* width: 25%; */
   /* flex-direction: column */
+}
+#timer > * {
+  margin: 10px 8px;
+}
+#timer h1 {
+  font-size: 2rem;
+  color: white;
 }
 
 #timer-buttons {
@@ -454,4 +467,20 @@ input:focus {
 }
 .list-text-field {
   border:0;
+}
+
+@media(max-width:767px) {
+  .list-text-field {
+    width: 80%;
+  }
+  .item-contains input[type="checkbox"] {
+    margin-right: 5%;
+  }
+
+  .App-header h1.title {
+    width: 100%;
+  }
+  #timer {
+    width: 100%;
+  }
 }
