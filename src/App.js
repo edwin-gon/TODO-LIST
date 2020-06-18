@@ -9,9 +9,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>POM-TO-DO</h1>
-        <div className="timer-content">
-          <Timer />
-        </div>
+
+        <Timer />
       </header>
       <Table />
       <br />
