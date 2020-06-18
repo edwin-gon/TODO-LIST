@@ -196,19 +196,185 @@ h2{
 
 #pomodoro {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  /* justify-content: space-evenly; */
   width: 100%;
   background-color: orange;
   padding: 2%;
 }
 
-.gauges {
+#pomodoro-header {
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
   justify-content: space-evenly;
+  width: 100%;
   border-bottom: 6px solid white;
 }
+
+.play-button {
+  width: 0;
+  height: 0;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 45px solid black;
+
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 22px solid black;
+  transform: rotate(45deg);
+  position: relative;
+  left: 22px;
+  top: -2px;
+}
+
+/* .reset-button {
+  width: 45px;
+  height: 45px;
+  border-width: 10px 6px 20px 10px;
+  border-radius: 50% 37% 20% 50%;
+  border-color: black;
+  border-style: solid;
+} */
+
+.clock {
+  width: 65px;
+  height: 65px;
+  border: 3px solid #C55E5E;
+  border-radius: 50%;
+  position: relative;
+  margin: 0px 0px 0px 12px;
+}
+
+.clock:hover {
+  cursor: pointer;
+}
+
+.tomato-top-left {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 20px solid green;
+  transform: translate(-50%,-70%);
+  left:28%;
+}
+.tomato-top-right {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 20px solid green;
+  transform: translate(-50%,-70%);
+  left:72%;
+}
+.tomato-top {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 20px solid green;
+  transform: translate(-50%,-70%);
+  left:50%;
+  top:-5px
+}
+.clock-border {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px dashed yellow;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.clock-center {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  background-color: cyan;
+  border-radius: 50%;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  z-index: 100;
+}
+.clock-hour {
+  position: absolute;
+  height: 30px;
+  width: 5px;
+  border: 1px solid white;
+  border-radius: 50% 50% 0px 0px;
+  top: 35%;
+  left: 50%;
+  /* transform-origin: 100% 80%; */
+  transform: translate(-50%,-50%);
+  z-index: 2;
+}
+.clock-minute {
+  position: absolute;
+  background-color: black;
+  height: 30px;
+  width: 6px;
+  border: 1px solid white;
+  border-radius: 50% 50% 0px 0px;
+  top: 37%;
+  left: 50%;
+  transform-origin: 50% 73%;
+  transform: translate(-50%,-50%) rotate(90deg);
+  z-index: 1
+}
+
+.reset-button {
+  width: 25px;
+  height: 25px;
+  border-width: 10px 10px 10px 10px;
+  border-radius: 50%;
+  border-color: black;
+  border-style: solid;
+  border-right: 10px solid transparent;
+  transition: transform linear 500ms;
+}
+
+.reset-button:hover {
+  transform: rotate(360deg);
+}
+
+.stop-button {
+  width: 45px;
+  height: 45px;
+  background-color: red;
+}
+#stage-header {
+  display: flex;
+  flex-direction: column;
+  /* width: 50%; */
+  align-items: center;
+}
+#time-header {
+  display: flex;
+  /* width: 50%; */
+  flex-direction: column;
+  align-items: center;
+}
+
+.gauges {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.gauge label{
+  color: black;
+  margin-right: 8px;
+}
+
 #timer {
   display: flex;
   justify-content: center;

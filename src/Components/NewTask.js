@@ -31,13 +31,21 @@ export default function NewTask({ insertItem }) {
     }
   }
 
+  const handleBlur = () => {
+    if (item.length > 0) {
+      insertItem(item)
+      enterItem("")
+    }
+    setAdd(false)
+  }
+
 
   return (<div className="new-task-contains">
     {(!adding) ? <span id="add-item"
       onClick={() => setAdd(true)}>+ New Item</span> :
       <input className="list-text-field"
         ref={myInput}
-        onBlur={() => setAdd(false)}
+        onBlur={handleBlur}
         placeholder="New Item"
         value={item}
         onChange={handleChange}
