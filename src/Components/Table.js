@@ -33,9 +33,9 @@ export default function Table() {
     }))
   }
   //UPDATE
-  const updateItem = (index) => {
+  // const updateItem = (index) => {
 
-  }
+  // }
   //DELETE
   const deleteItem = (item) => {
     //Copy array and remove item in copy
@@ -61,6 +61,7 @@ export default function Table() {
     //if all ignore filter 
     setFilter(value)
   }
+  console.log(item)
   return (
     <>
       <div className="category-header">
